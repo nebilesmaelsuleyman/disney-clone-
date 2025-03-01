@@ -22,37 +22,36 @@ function Slider() {
 		}
 	}
 	const sliderRight = () => {
-		elementRef.current.scrollLeft += window.innerWidth - 110
+		elementRef.current.scrollLeft += elementRef.current.clientWidth
 	}
 
 	const sliderLeft = () => {
-		elementRef.current.scrollLeft -= window.innerWidth - 110
+		elementRef.current.scrollLeft -= elementRef.current.clientWidth
 	}
 
 	return (
-		<div className='relative h-[400px] md:h-[310px] '>
+		<div className='relative h-[400px] md:h-[310px]'>
 			<HiChevronLeft
-				className='hidden md:block text-white text-[30px] absolute
-        mx-8 mt-[150px] cursor-pointer '
-				onClick={() => sliderLeft(sliderLeft)}
+				className='hidden md:block text-white text-[30px] absolute left-0 mx-8 mt-[150px] cursor-pointer'
+				onClick={sliderLeft}
 			/>
 			<HiChevronRight
-				className='hidden md:block text-white text-[30px] absolute
-        mx-8 mt-[150px] cursor-pointer right-0'
-				onClick={() => sliderRight(sliderRight)}
+				className='hidden md:block text-white text-[30px] absolute right-0 mx-8 mt-[150px] cursor-pointer'
+				onClick={sliderRight}
 			/>
-
 			<div
-				className='flex  overflow-x-auto  scroll-smooth w-full   px-16 py-4 object-cover'
+				className='overflow-x-hidden flex md:overflow-hidden scroll-smooth w-full hover:border-[3px] translation-all duration-100 ease-in-out border-gray-400'
 				ref={elementRef}
+				style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
 			>
 				{MovieList.map((item, index) => (
-					<img
-						key={index}
-						src={IMAGE_BASE_URL + item.backdrop_path}
-						alt='poster'
-						className='  min-w-full h-[310px] hide-scrollbar object-cover object-left-top  mr-5 py-2 rounded-md hover:border-[4px] border-gray-400 translate-all  duration-100 ease-in-out'
-					/>
+					<div key={index} className='w-full ' style={{ minWidth: '100%' }}>
+						<img
+							src={IMAGE_BASE_URL + item.backdrop_path}
+							alt='poster'
+							className='w-full h-[400px] md:h-[310px] object-cover object-left-top'
+						/>
+					</div>
 				))}
 			</div>
 		</div>

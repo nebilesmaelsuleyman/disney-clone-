@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const MovieBaseURL = 'https://api.themoviedb.org/3'
 const APIKEY = 'e05378e2fab6394d18814f7077b0882e'
+const movieByGenreBaseURL = `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}`
 
 const getTrendingVideos = async () => {
 	try {
@@ -14,7 +15,16 @@ const getTrendingVideos = async () => {
 		throw error
 	}
 }
+const getMovieByGenre = async (id) => {
+	try {
+		const getMovie = await axios.get(movieByGenreBaseURL + '&with_genres=' + id)
+		return getMovie.data
+	} catch (error) {
+		console.error('Error fetching movies by genre:', error)
+	}
+}
 
 export default {
 	getTrendingVideos,
+	getMovieByGenre,
 }
