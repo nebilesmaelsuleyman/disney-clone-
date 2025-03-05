@@ -1,16 +1,25 @@
 import './App.css'
-import GenreMovieList from './components/GenreMovieList.jsx'
-import Header from './components/Header.jsx'
-import ProductionHouse from './components/ProductionHouse.jsx'
-import Slider from './components/Slider.jsx'
+import { Routes, Route } from 'react-router-dom'
+import Home from './Page/Home'
+import Comedy from './page/Comedy'
+import Detail from './Page/Detail'
+import Animation from './Page/Animation'
+import Adventure from './page/Adventure'
+import Action from './page/Action'
 function App() {
 	return (
 		<>
 			<div>
-				<Header />
-				<Slider />
-				<ProductionHouse />
-				<GenreMovieList />
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/comedy' element={<Comedy />} />
+					<Route path='/animation' element={<Animation />} />
+					<Route path='/adventure' element={<Adventure />} />
+					<Route path='/action' element={<Action />} />
+					<Route path='/movie/:id' element={<Detail />} />
+
+					{/* <Route path='/genre/:genre' element={<Genre />} /> */}
+				</Routes>
 			</div>
 		</>
 	)

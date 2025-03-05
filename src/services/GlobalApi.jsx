@@ -24,7 +24,20 @@ const getMovieByGenre = async (id) => {
 	}
 }
 
+const getMovieDetail = async (id) => {
+	try {
+		// const Detailpage = await axios.get(MovieBaseURL + '/movie/' + id)
+		const Detailpage = await axios.get(`${MovieBaseURL}/movie/${id}`, {
+			params: { api_key: APIKEY, language: 'en-US' },
+		})
+		return Detailpage.data
+	} catch (error) {
+		console.log('Error fetching movie detail:', error.message)
+	}
+}
+
 export default {
 	getTrendingVideos,
 	getMovieByGenre,
+	getMovieDetail,
 }

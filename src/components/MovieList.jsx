@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import GlobalApi from '../services/GlobalApi'
 import MovieCard from './MovieCard'
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5'
+import HrMovieCard from './HrMovieCard'
 
 function MovieList({ genereId, index_ }) {
 	const [MovieList, setMovieList] = useState([])
@@ -30,6 +31,11 @@ function MovieList({ genereId, index_ }) {
 		elementRef.current.scrollLeft += window.innerWidth
 	}
 
+	const handleMovieClick = (id) => {
+		console.log('id of the movie', id)
+		window.location.href = `/movie/${id}`
+	}
+
 	return (
 		<div className='relative'>
 			<IoChevronBackOutline
@@ -40,9 +46,21 @@ function MovieList({ genereId, index_ }) {
 				ref={elementRef}
 				className='flex overflow-hidden scroll-smooth w-full px-9 object-cover'
 			>
-				{MovieList.map((item, index) => (
-					<MovieCard key={index} movie={item} />
-				))}
+				{MovieList.map((item, index_) =>
+					index_ % 3 == 0 ? (
+						<HrMovieCard
+							key={item.id}
+							movie={item}
+							handleClick={() => handleMovieClick(item.id)}
+						/>
+					) : (
+						<MovieCard
+							key={item.id}
+							movie={item}
+							handleClick={() => handleMovieClick(item.id)}
+						/>
+					)
+				)}
 			</div>
 			<IoChevronForwardOutline
 				onClick={(e) => slideRight(e)}
