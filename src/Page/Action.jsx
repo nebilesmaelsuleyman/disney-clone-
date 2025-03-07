@@ -1,37 +1,39 @@
 import React, { useEffect } from 'react'
-import CategoryList from '../components/CategoryList'
-import Header from '../components/Header'
-import { useState } from 'react'
-import MovieCard from '../components/MovieCard'
-import GlobalApi from '../services/GlobalApi'
-import GenreMovieList from '../components/GenreMovieList'
 
+import Header from '../components/Header'
+
+import MovieCard from '../components/MovieCard'
+
+import { useContext } from 'react'
+import { MovieContext } from '../context/MovieContext'
 const Action = () => {
-	const [movies, setMovies] = useState([])
+	const { movies, getMoviesByGenreId } = useContext(MovieContext)
+
+	const handleMovieClick = (id) => {
+		console.log('id of the movie', id)
+		window.location.href = `/movie/${id}`
+	}
 
 	useEffect(() => {
-		getMovieByGenreId(28)
-	}, [])
-	const getMovieByGenreId = async (id) => {
-		try {
-			const resp = await GlobalApi.getMovieByGenre(id)
-			setMovies(resp.results)
-		} catch (error) {
-			console.error('Failed to fetch movies:', error)
-		}
-	}
+		getMoviesByGenreId(28)
+	}, [getMoviesByGenreId])
 
 	return (
 		<div>
 			<Header />
 
-			<h2 className='text-white text-2xl p-3'>Adventure</h2>
+			<h2 className='text-white text-2xl p-3'>Action</h2>
 			<div className='flex flex-wrap justify-center'>
 				{movies.map((movie, index) => (
-					<MovieCard key={index} movie={movie} />
+					<MovieCard
+						key={index}
+						movie={movie}
+						handleClick={() => handleMovieClick(movie.id)}
+					/>
 				))}
 			</div>
 		</div>
 	)
 }
+
 export default Action
