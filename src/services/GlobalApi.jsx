@@ -23,6 +23,16 @@ const getMovieByGenre = async (id) => {
 		console.error('Error fetching movies by genre:', error)
 	}
 }
+const getCredits = async (id) => {
+	try {
+		const credits = await axios.get(`${MovieBaseURL}/movie/${id}/credits`, {
+			params: { api_key: APIKEY },
+		})
+		return credits.data
+	} catch (error) {
+		console.error('error message from getting credits', error)
+	}
+}
 
 const getMovieDetail = async (id) => {
 	try {
@@ -40,4 +50,5 @@ export default {
 	getTrendingVideos,
 	getMovieByGenre,
 	getMovieDetail,
+	getCredits,
 }

@@ -14,10 +14,8 @@ function DetailCard({ detail }) {
 			}}
 		>
 			{/* Overlay with opacity */}
-			<div className='absolute inset-0 bg-sky-500/30 bg-opacity-50'>
-				{/* Content */}
+			<div className='absolute inset-0 bg-[#6F6967]bg-opacity-50'>
 				<div className='relative z-10 flex p-8 text-white'>
-					{/* Poster Image */}
 					<img
 						src={
 							detail.belongs_to_collection
